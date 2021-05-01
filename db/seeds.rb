@@ -14,7 +14,16 @@ require 'byebug'
 
 puts "Running seed..."
 puts "Destroying Job table..."
-Job.delete_all
+Job.destroy_all
+puts "Destroying User table..."
+User.destroy_all
+
+
+puts "Creating users..."
+jeremaia = User.create!(first_name: 'Jeremaia', email: 'jeremaia@example.com', password: '123456')
+
+
+#   Doors Open
 
 puts "Running Doors Open..."
 browser = Watir::Browser.new
@@ -41,6 +50,7 @@ job_listings.each do |job_listing|
   )
 end
 
+#   Festicekt
 
 puts "Running Festicket..."
 browser = Watir::Browser.new
