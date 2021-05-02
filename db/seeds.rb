@@ -20,8 +20,9 @@ User.destroy_all
 
 
 puts "Creating users..."
-jeremaia = User.create!(first_name: 'Jeremaia', email: 'jeremaia@example.com', password: '123456')
-
+jeremaia = User.create!(first_name: 'Jeremaia', last_name: 'Harrison', email: 'jeremaia@example.com', password: '123456')
+tania = User.create!(first_name: 'Tania', last_name: 'Fernandes', email: 'tania@example.com', password: '123456')
+lee = User.create!(first_name: 'Lee', last_name: 'Harrison', email: 'lee@example.com', password: '123456')
 
 #   Doors Open
 
@@ -35,9 +36,11 @@ while browser.button(text: 'Load more').present?
   sleep 1
 end
 
+puts "Parsing..."
 parse_page = Nokogiri::HTML(browser.html)
 job_listings = parse_page.css('.listing-item') # 36
 
+puts "Saving jobs..."
 job_listings.each do |job_listing|
   job = Job.create!(
     title: job_listing.css('.media-heading').text.strip,
