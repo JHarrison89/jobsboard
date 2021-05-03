@@ -8,7 +8,9 @@
         <div class="card-product-infos">
           <h2><%= job.title %></h2>
           <p><%= job.short_desc %></p>
-           <p><%= job.employer %></p>
+          <p><%= job.employer %></p>
+          <%= link_to save_path(job) do %><i class="far fa-star gold"></i><% end %>
+
         </div>
       </div>
 
