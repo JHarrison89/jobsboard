@@ -3,6 +3,14 @@ class JobsController < ApplicationController
     @jobs = Job.all
   end
 
+  def saved
+    @jobs = Job.all(where: user_id == current_user, status: 'saved')
+  end
+
+  def removed
+    @jobs = Job.all
+  end
+
   def show
   end
 

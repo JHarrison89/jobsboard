@@ -1,10 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# # This file should contain all the record creation needed to seed the database with its default values.
+# # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+# #
+# # Examples:
+# #
+# #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+# #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'HTTParty'
 require 'Nokogiri'
@@ -13,6 +13,8 @@ require 'webdrivers/chromedriver'
 require 'byebug'
 
 puts "Running seed..."
+puts "Destroying Item table..."
+Item.destroy_all
 puts "Destroying Job table..."
 Job.destroy_all
 puts "Destroying User table..."
@@ -78,6 +80,7 @@ job_listings.each do |job_listing|
   desc = parse_page.css('.job-preview-styles__description--2BkR3').text
 
   puts "Saving job..."
+
   job = Job.create!(
     title: job_listing.css('.careers-jobs-list-styles__title--1cN5S').text.strip,
     employer: 'Festicekt',
@@ -88,5 +91,23 @@ job_listings.each do |job_listing|
     source: "Festicket"
     )
 end
+
+status = ['none','saved','removed']
+
+
+puts "Users picking jobs..."
+User.all.each do |user|
+  5.times do
+    job = Job.all.sample
+    Item.create!(
+      user_id: user.id,
+      job_id: job.id,
+      status: status.sample
+      )
+    end
+end
+
+puts "Seed complete...🌱"
+
 
 
