@@ -9,7 +9,7 @@
           <h2><%= job.title %></h2>
           <p><%= job.short_desc %></p>
           <p><%= job.employer %></p>
-          <%= link_to save_path(job) do %><i class="fa fa-star gold"></i><% end %>
+          <%= link_to remove_path(job), method: 'patch' do %><i class="fa fa-star gold"></i><% end %>
 
         </div>
       </div>

@@ -1,7 +1,10 @@
 class JobsController < ApplicationController
   def index
-    #Select all jobs which current user does not have an item for
-    @jobs = Job.all.where(id: Item.all.select(:job_id).where!(user_id: current_user, status: 'none'))
+    @jobs = Job.all - Job.all.where(id: Item.all.select(:job_id).where(user_id: current_user, status: 'saved'))
+  end
+
+  def saved
+    @jobs = Job.all.where(id: Item.all.select(:job_id).where(user_id: current_user, status: 'saved'))
   end
 
   def save
@@ -14,8 +17,10 @@ class JobsController < ApplicationController
     redirect_to jobs_path, notice: "Job saved..."
   end
 
-  def saved
-    @jobs = Job.all.where(id: Item.all.select(:job_id).where(user_id: current_user, status: 'saved'))
+  def remove
+    item = current_user.items.find_by(job_id: params[:id])
+    item.destroy
+    redirect_to jobs_saved_path, notice: "Job removed..."
   end
 
   def removed
@@ -31,13 +36,4 @@ class JobsController < ApplicationController
   def create
   end
 
-  def update
-    item = Item.find(params[:id])
-    if item.status == 'saved'
-      item.status = 'none'
-    else
-      item.status = 'saved'
-    end
-    redirect_to jobs_saved_path, notice: "Job saved..."
-  end
 end
