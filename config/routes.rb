@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  # get 'jobs/index'
-  # get 'jobs/show'
   get 'jobs/saved'
-  # get 'jobs/save'
   get 'jobs/save/:id', to: "jobs#save", as: :save
+  patch 'jobs/save/:id', to: "jobs#remove", as: :remove
   get 'jobs/create'
   devise_for :users
   root to: 'pages#home'
