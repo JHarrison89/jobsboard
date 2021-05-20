@@ -1,10 +1,15 @@
 class JobsController < ApplicationController
   def index
     @jobs = Job.all - Job.all.where(id: Item.all.select(:job_id).where(user_id: current_user, status: 'saved'))
+    @total_jobs = @jobs.count
+    @total_saved = Job.all.where(id: Item.all.select(:job_id).where(user_id: current_user, status: 'saved')).count
   end
 
   def saved
     @jobs = Job.all.where(id: Item.all.select(:job_id).where(user_id: current_user, status: 'saved'))
+    @total_saved = @jobs.count
+
+    @total_jobs = Job.all.where(id: Item.all.select(:job_id).where(user_id: current_user, status: 'saved')).count
   end
 
   def save

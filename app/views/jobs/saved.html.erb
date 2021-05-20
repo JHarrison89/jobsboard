@@ -1,10 +1,10 @@
 
 <div class="container d-flex flex-row-reverse">
-    <div class="col-md-8">
-      <h2>saved Jobs</h2>
+    <div class="col-md-8 mt-4">
+      <h2 class="mb-4">My Jobs</h2>
 
-        <%= link_to "All jobs", jobs_path, class: "btn btn-primary" %>
-        <%= link_to "My jobs", jobs_saved_path, class: "btn btn-primary" %>
+        <%= link_to "All jobs #{@total_jobs}", jobs_path, class: "btn-off" %>
+        <%= link_to "My jobs #{@total_saved}", jobs_saved_path, class: "btn-on" %>
 
       <% @jobs.each do |job| %>
         <div class="card-product mt-4">
