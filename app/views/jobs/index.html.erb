@@ -1,7 +1,6 @@
 
 <div class="container d-flex flex-row-reverse">
-    <div class="col-md-8 mt-4">
-      <h2 class="mb-4">All Jobs</h2>
+    <div class="col-md-8 mt-5">
 
         <%= link_to "All jobs #{@total_jobs}", jobs_path, class: "btn-on" %>
         <%= link_to "My jobs #{@total_saved}", jobs_saved_path, class: "btn-off" %>
@@ -10,8 +9,8 @@
         <div class="card-product mt-4">
           <div class="card-product-infos">
             <h2><%= job.title %></h2>
-            <p><%= job.short_desc %></p>
-            <p><%= job.employer %></p>
+            <h2><%= job.employer %></h2>
+            <p><%= job.location %></p>
             <%= link_to save_path(job) do %><i class="far fa-star gold"></i><% end %>
           </div>
         </div>
